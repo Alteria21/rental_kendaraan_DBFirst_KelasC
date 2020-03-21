@@ -16,7 +16,7 @@ namespace rental_kendaraan_DBFirst_KelasC.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        RoleManager<IdentityRole> _roleManager;
+        RoleManager<IdentityRole> _roleManage;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
