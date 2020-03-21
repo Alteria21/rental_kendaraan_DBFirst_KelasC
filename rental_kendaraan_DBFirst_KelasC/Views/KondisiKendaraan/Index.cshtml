@@ -1,0 +1,47 @@
+﻿@*@model IEnumerable<rental_kendaraan_DBFirst_KelasC.Models.KondisiKendaraan>*@
+
+@model PaginatedList<rental_kendaraan_DBFirst_KelasC.Models.KondisiKendaraan>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>KondisiKendaraan</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+    @using (Html.BeginForm("Index", "KondisiKendaraan", FormMethod.Get))
+    {
+    <p>
+        KondisiKendaraan : @Html.DropDownList("Kondisi", "pilih kondisi")
+        Cari dari : @Html.TextBox("searchString")
+        <input type="submit" value="filter">
+    </p>
+}
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @*@Html.DisplayName("Kondisi Kendaraan")*@
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nama Kondisi</a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NamaKondisi)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdKondisi">Ubah</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdKondisi">Detail</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdKondisi">Hapus</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

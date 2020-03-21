@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        .mynav_navbar {
+            overflow: hidden;
+            background-color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+
+            .mynav_navbar a {
+                float: left;
+                font-size: 16px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+        .mynav_dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+
+
+            .mynav_dropdown .mynav_dropbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+
+
+
+            .mynav_navbar a:hover, .mynav_dropdown:hover .mynav_dropbtn {
+                background-color: red;
+            }
+
+
+
+        .mynav_dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+
+            .mynav_dropdown-content a {
+                float: none;
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+
+
+                .mynav_dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+
+
+        .mynav_dropdown:hover .mynav_dropdown-content {
+            display: block;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - rental_kendaraan_DBFirst_KelasC</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body style="background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">First</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Upload" asp-action="Index">Upload</a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-area="" asp-controller="Role" asp-action="Index">Role</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Daftar Rental<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Customer" asp-action="Index">Customer</a></li>
+                                <li><a asp-area="" asp-controller="Peminjaman" asp-action="Index">Peminjaman</a></li>
+                                <li><a asp-area="" asp-controller="Pengembalian" asp-action="Index">Pengembalian</a></li>
+                                <li><a asp-area="" asp-controller="Kendaraan" asp-action="Index">Kendaraan</a></li>
+                                <li><a asp-area="" asp-controller="JenisKendaraan" asp-action="Index">Jenis Kendaraan</a></li>
+                                <li><a asp-area="" asp-controller="KondisiKendaraan" asp-action="Index">Kondisi Kendaraan</a></li>
+                                <li><a asp-area="" asp-controller="Jaminan" asp-action="Index">Jaminan</a></li>
+                                <li><a asp-area="" asp-controller="Gender" asp-action="Index">Gender</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else if (User.IsInRole("Manager"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Daftar Rental<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Peminjaman" asp-action="Index">Peminjaman</a></li>
+                                <li><a asp-area="" asp-controller="Pengembalian" asp-action="Index">Pengembalian</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else if (User.IsInRole("Kasir"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Daftar Rental<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Customer" asp-action="Index">Customer</a></li>
+                                <li><a asp-area="" asp-controller="Peminjaman" asp-action="Index">Peminjaman</a></li>
+                                <li><a asp-area="" asp-controller="Pengembalian" asp-action="Index">Pengembalian</a></li>
+                                <li><a asp-area="" asp-controller="Kendaraan" asp-action="Index">Kendaraan</a></li>
+                                <li><a asp-area="" asp-controller="JenisKendaraan" asp-action="Index">Jenis Kendaraan</a></li>
+                                <li><a asp-area="" asp-controller="KondisiKendaraan" asp-action="Index">Kondisi Kendaraan</a></li>
+                                <li><a asp-area="" asp-controller="Jaminan" asp-action="Index">Jaminan</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+            <partial name="_CookieConsentPartial" />
+
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; 2019 - rental_kendaraan_DBFirst_KelasC</p>
+                </footer>
+            </div>
+
+            <environment include="Development">
+                <script src="~/lib/jquery/dist/jquery.js"></script>
+                <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+                <script src="~/js/site.js" asp-append-version="true"></script>
+            </environment>
+            <environment exclude="Development">
+                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                        asp-fallback-test="window.jQuery"
+                        crossorigin="anonymous"
+                        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+                </script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                        asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                        asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                        crossorigin="anonymous"
+                        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+                </script>
+                <script src="~/js/site.min.js" asp-append-version="true"></script>
+            </environment>
+
+            @RenderSection("Scripts", required: false)
+</body>
+</html>
